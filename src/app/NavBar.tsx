@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import ThemeToggle from "./ThemeToggle";
 
 const links = [
   { id: "projects", label: "Projects" },
@@ -61,7 +60,6 @@ export default function NavBar() {
           >
             Download CV
           </a>
-          <ThemeToggle />
         </div>
       </div>
     </header>
