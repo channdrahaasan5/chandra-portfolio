@@ -18,12 +18,25 @@ export const metadata: Metadata = {
     "Portfolio of B Chandra Hasan, Senior Mobile Application Developer with 8+ years building native and cross-platform mobile apps, SDKs, and biometric KYC systems.",
 };
 
+const themeInitScript = `
+  try {
+    var stored = localStorage.getItem('theme');
+    if (stored === 'light' || stored === 'dark') {
+      document.documentElement.setAttribute('data-theme', stored);
+    }
+  } catch (e) {}
+`;
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );

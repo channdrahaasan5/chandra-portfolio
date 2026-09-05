@@ -1,4 +1,14 @@
-import PocApps from "./PocApps";
+import NavBar from "./NavBar";
+import Reveal from "./Reveal";
+import KineticHero from "./KineticHero";
+import CursorGlow from "./CursorGlow";
+
+const stats = [
+  { value: "8+", label: "Years of Experience" },
+  { value: "13+", label: "Apps Delivered" },
+  { value: "4", label: "Biometric SDKs Integrated" },
+  { value: "1", label: "Production SDK Shipped" },
+];
 
 const skillGroups = [
   {
@@ -143,7 +153,7 @@ function SectionHeading({ eyebrow, title }: { eyebrow: string; title: string }) 
   return (
     <div className="mb-10">
       <p className="text-sm font-medium tracking-wide text-accent uppercase">{eyebrow}</p>
-      <h2 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">{title}</h2>
+      <h2 className="mt-2 text-4xl font-black tracking-tighter sm:text-5xl">{title}</h2>
     </div>
   );
 }
@@ -158,172 +168,180 @@ function Tag({ children }: { children: string }) {
 
 export default function Home() {
   return (
-    <main className="mx-auto max-w-5xl px-6 sm:px-8">
-      {/* Nav */}
-      <header className="flex items-center justify-between py-6">
-        <span className="font-semibold tracking-tight">B. Chandra Hasan</span>
-        <nav className="hidden gap-6 text-sm text-muted sm:flex">
-          <a href="#projects" className="hover:text-foreground">Projects</a>
-          <a href="#poc-apps" className="hover:text-foreground">POC Apps</a>
-          <a href="#skills" className="hover:text-foreground">Skills</a>
-          <a href="#experience" className="hover:text-foreground">Experience</a>
-          <a href="#contact" className="hover:text-foreground">Contact</a>
-        </nav>
-      </header>
+    <>
+      <CursorGlow />
+      <NavBar />
+      <main className="relative z-10 mx-auto max-w-5xl px-6 sm:px-8">
+        <KineticHero />
 
-      {/* Hero */}
-      <section className="flex min-h-[70vh] flex-col justify-center py-16">
-        <p className="text-sm font-medium tracking-wide text-accent uppercase">
-          Senior Mobile Application Developer
-        </p>
-        <h1 className="mt-3 max-w-3xl text-4xl font-bold tracking-tight sm:text-6xl">
-          Building native &amp; cross-platform mobile apps, SDKs, and biometric KYC systems.
-        </h1>
-        <p className="mt-6 max-w-2xl text-lg text-muted">
-          8+ years shipping iOS, Android, Flutter, and React Native applications for banking
-          and government clients — with particular depth in SDK development and biometric
-          identity verification.
-        </p>
-        <div className="mt-8 flex flex-wrap gap-4">
-          <a
-            href="#projects"
-            className="rounded-full bg-accent px-6 py-3 text-sm font-semibold text-accent-foreground transition hover:opacity-90"
-          >
-            View Projects
-          </a>
-          <a
-            href="#contact"
-            className="rounded-full border border-border px-6 py-3 text-sm font-semibold transition hover:bg-surface"
-          >
-            Get in Touch
-          </a>
-        </div>
-      </section>
-
-      {/* About */}
-      <section className="border-t border-border py-20">
-        <SectionHeading eyebrow="About" title="Summary" />
-        <p className="max-w-3xl text-lg leading-relaxed text-muted">
-          Senior Mobile Application Developer with 8+ years building native (iOS, Android)
-          and cross-platform (Flutter, React Native, Apache Cordova) applications, with
-          particular depth in SDK development and biometric/KYC identity verification for
-          banking and government clients. Owns projects end-to-end — from Swift/Kotlin
-          application code through PHP REST API backends to production deployment — and
-          has shipped a standalone iOS networking SDK (BioHaazNetwork) alongside a React
-          Native bridge for the IDEMIA Wallet SDK.
-        </p>
-      </section>
-
-      {/* Featured Projects */}
-      <section id="projects" className="border-t border-border py-20">
-        <SectionHeading eyebrow="Selected Work" title="Featured Projects" />
-        <div className="grid gap-6 sm:grid-cols-2">
-          {featuredProjects.map((project) => (
-            <article
-              key={project.title}
-              className="rounded-2xl border border-border bg-surface p-6"
-            >
-              <h3 className="text-lg font-semibold">{project.title}</h3>
-              <p className="mt-1 text-sm text-accent">{project.role}</p>
-              <p className="mt-3 text-sm leading-relaxed text-muted">{project.description}</p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {project.tech.map((t) => (
-                  <Tag key={t}>{t}</Tag>
-                ))}
-              </div>
-            </article>
-          ))}
-        </div>
-
-        <h3 className="mt-16 mb-6 text-xl font-semibold">Additional Projects</h3>
-        <div className="grid gap-4 sm:grid-cols-2">
-          {additionalProjects.map((project) => (
-            <div key={project.title} className="rounded-xl border border-border p-5">
-              <h4 className="font-medium">{project.title}</h4>
-              <p className="mt-1 text-xs text-muted">{project.tech}</p>
-              <p className="mt-2 text-sm text-muted">{project.description}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* POC Apps */}
-      <section id="poc-apps" className="border-t border-border py-20">
-        <SectionHeading eyebrow="Hands-on Builds" title="POC Apps" />
-        <p className="-mt-6 mb-10 max-w-2xl text-sm text-muted">
-          Tap a card to see the full details. (Screenshots and details coming soon — placeholders shown for now.)
-        </p>
-        <PocApps />
-      </section>
-
-      {/* Skills */}
-      <section id="skills" className="border-t border-border py-20">
-        <SectionHeading eyebrow="Toolbox" title="Skills" />
-        <div className="grid gap-8 sm:grid-cols-2">
-          {skillGroups.map((group) => (
-            <div key={group.label}>
-              <h3 className="text-sm font-semibold text-muted uppercase tracking-wide">
-                {group.label}
-              </h3>
-              <div className="mt-3 flex flex-wrap gap-2">
-                {group.items.map((item) => (
-                  <Tag key={item}>{item}</Tag>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Experience */}
-      <section id="experience" className="border-t border-border py-20">
-        <SectionHeading eyebrow="Career" title="Experience" />
-        <div className="space-y-8">
-          {experience.map((job) => (
-            <div key={job.company} className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
-              <div>
-                <h3 className="font-semibold">{job.title}</h3>
-                <p className="text-sm text-muted">
-                  {job.company} — {job.location}
+        {/* Stats */}
+        <Reveal>
+          <section className="grid grid-cols-2 gap-6 border-t border-border py-10 sm:grid-cols-4">
+            {stats.map((stat) => (
+              <div key={stat.label} className="text-center sm:text-left">
+                <p className="text-3xl font-bold tracking-tight text-accent sm:text-4xl">
+                  {stat.value}
                 </p>
+                <p className="mt-1 text-sm text-muted">{stat.label}</p>
               </div>
-              <p className="text-sm font-medium text-accent">{job.period}</p>
+            ))}
+          </section>
+        </Reveal>
+
+        {/* About */}
+        <Reveal>
+          <section className="border-t border-border py-20">
+            <SectionHeading eyebrow="About" title="Summary" />
+            <p className="max-w-3xl text-lg leading-relaxed text-muted">
+              Senior Mobile Application Developer with 8+ years building native (iOS, Android)
+              and cross-platform (Flutter, React Native, Apache Cordova) applications, with
+              particular depth in SDK development and biometric/KYC identity verification for
+              banking and government clients. Owns projects end-to-end — from Swift/Kotlin
+              application code through PHP REST API backends to production deployment — and
+              has shipped a standalone iOS networking SDK (BioHaazNetwork) alongside a React
+              Native bridge for the IDEMIA Wallet SDK.
+            </p>
+          </section>
+        </Reveal>
+
+        {/* Featured Projects */}
+        <section id="projects" className="border-t border-border py-20">
+          <Reveal>
+            <p className="text-sm font-medium tracking-wide text-accent uppercase">Selected Work</p>
+            <h2 className="mt-2 text-5xl font-black tracking-tighter sm:text-6xl">
+              Featured Projects
+            </h2>
+          </Reveal>
+
+          <div className="mt-14 divide-y divide-border border-t border-border">
+            {featuredProjects.map((project, i) => (
+              <Reveal key={project.title} delay={i * 0.06}>
+                <details className="group py-8">
+                  <summary className="flex cursor-pointer list-none items-start justify-between gap-6">
+                    <div className="flex items-start gap-6">
+                      <span className="pt-1 text-sm font-mono text-muted">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <div>
+                        <h3 className="text-2xl font-bold tracking-tight transition-colors group-hover:text-accent sm:text-3xl">
+                          {project.title}
+                        </h3>
+                        <p className="mt-1 text-sm text-accent">{project.role}</p>
+                      </div>
+                    </div>
+                    <span className="pt-1 text-2xl text-muted transition-transform duration-300 group-open:rotate-45">
+                      +
+                    </span>
+                  </summary>
+                  <div className="mt-4 pl-0 sm:pl-12">
+                    <p className="max-w-2xl text-base leading-relaxed text-muted">
+                      {project.description}
+                    </p>
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {project.tech.map((t) => (
+                        <Tag key={t}>{t}</Tag>
+                      ))}
+                    </div>
+                  </div>
+                </details>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal>
+            <h3 className="mt-16 mb-6 text-xl font-semibold">Additional Projects</h3>
+          </Reveal>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {additionalProjects.map((project, i) => (
+              <Reveal key={project.title} delay={i * 0.05}>
+                <div className="h-full rounded-xl border border-border p-5">
+                  <h4 className="font-medium">{project.title}</h4>
+                  <p className="mt-1 text-xs text-muted">{project.tech}</p>
+                  <p className="mt-2 text-sm text-muted">{project.description}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+
+        {/* Skills */}
+        <section id="skills" className="border-t border-border py-20">
+          <Reveal>
+            <SectionHeading eyebrow="Toolbox" title="Skills" />
+          </Reveal>
+          <div className="grid gap-8 sm:grid-cols-2">
+            {skillGroups.map((group, i) => (
+              <Reveal key={group.label} delay={i * 0.05}>
+                <div>
+                  <h3 className="text-sm font-semibold text-muted uppercase tracking-wide">
+                    {group.label}
+                  </h3>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {group.items.map((item) => (
+                      <Tag key={item}>{item}</Tag>
+                    ))}
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+
+        {/* Experience */}
+        <section id="experience" className="border-t border-border py-20">
+          <Reveal>
+            <SectionHeading eyebrow="Career" title="Experience" />
+          </Reveal>
+          <div className="space-y-8">
+            {experience.map((job, i) => (
+              <Reveal key={job.company} delay={i * 0.05}>
+                <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+                  <div>
+                    <h3 className="font-semibold">{job.title}</h3>
+                    <p className="text-sm text-muted">
+                      {job.company} — {job.location}
+                    </p>
+                  </div>
+                  <p className="text-sm font-medium text-accent">{job.period}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+
+        {/* Contact */}
+        <Reveal>
+          <section id="contact" className="border-t border-border py-20">
+            <SectionHeading eyebrow="Get in Touch" title="Contact" />
+            <div className="flex flex-wrap gap-4">
+              <a
+                href="mailto:channdrahaasan5@gmail.com"
+                className="rounded-full bg-accent px-6 py-3 text-sm font-semibold text-accent-foreground transition hover:opacity-90"
+              >
+                channdrahaasan5@gmail.com
+              </a>
+              <a
+                href="https://www.linkedin.com/in/chandra-hasan-88023819b/"
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-full border border-border px-6 py-3 text-sm font-semibold transition hover:bg-surface"
+              >
+                LinkedIn
+              </a>
+              <a
+                href="tel:+919652220652"
+                className="rounded-full border border-border px-6 py-3 text-sm font-semibold transition hover:bg-surface"
+              >
+                +91 96522 20652
+              </a>
             </div>
-          ))}
-        </div>
-      </section>
+          </section>
+        </Reveal>
 
-      {/* Contact */}
-      <section id="contact" className="border-t border-border py-20">
-        <SectionHeading eyebrow="Get in Touch" title="Contact" />
-        <div className="flex flex-wrap gap-4">
-          <a
-            href="mailto:channdrahaasan5@gmail.com"
-            className="rounded-full bg-accent px-6 py-3 text-sm font-semibold text-accent-foreground transition hover:opacity-90"
-          >
-            channdrahaasan5@gmail.com
-          </a>
-          <a
-            href="https://www.linkedin.com/in/chandra-hasan-88023819b/"
-            target="_blank"
-            rel="noreferrer"
-            className="rounded-full border border-border px-6 py-3 text-sm font-semibold transition hover:bg-surface"
-          >
-            LinkedIn
-          </a>
-          <a
-            href="#"
-            className="rounded-full border border-border px-6 py-3 text-sm font-semibold text-muted transition hover:bg-surface"
-            title="Add your GitHub profile URL here"
-          >
-            GitHub (add your URL)
-          </a>
-        </div>
-      </section>
-
-      <footer className="border-t border-border py-10 text-center text-sm text-muted">
-        © {new Date().getFullYear()} B. Chandra Hasan. Built with Next.js &amp; Tailwind CSS.
-      </footer>
-    </main>
+        <footer className="border-t border-border py-10 text-center text-sm text-muted">
+          © {new Date().getFullYear()} B. Chandra Hasan. Built with Next.js &amp; Tailwind CSS.
+        </footer>
+      </main>
+    </>
   );
 }
