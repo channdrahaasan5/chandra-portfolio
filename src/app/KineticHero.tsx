@@ -18,30 +18,16 @@ const word = {
   show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" as const } },
 };
 
-const nameLine = {
-  hidden: { opacity: 0, y: 40 },
-  show: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const, delay: i * 0.1 },
-  }),
-};
-
 export default function KineticHero() {
   return (
     <section className="relative flex min-h-[92vh] flex-col justify-center overflow-hidden py-24">
       <AmbientGlow />
 
       <Mascot
-        size={110}
-        delay={0.2}
-        className="pointer-events-none absolute bottom-4 left-[6%] hidden sm:block"
-      />
-      <Mascot
         size={90}
         flip
         delay={1.1}
-        className="pointer-events-none absolute right-[8%] bottom-16 hidden sm:block"
+        className="pointer-events-none absolute right-[8%] bottom-8 hidden lg:block"
       />
 
       <span className="inline-flex w-fit items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-xs font-medium text-muted">
@@ -51,19 +37,17 @@ export default function KineticHero() {
 
       <h1 className="mt-6 text-[15vw] leading-[0.9] font-black tracking-tighter sm:text-[9vw] lg:text-[7.5rem]">
         <motion.span
-          custom={0}
-          initial="hidden"
-          animate="show"
-          variants={nameLine}
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0 }}
           className="block"
         >
           CHANDRA
         </motion.span>
         <motion.span
-          custom={1}
-          initial="hidden"
-          animate="show"
-          variants={nameLine}
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
           className="block text-accent"
         >
           HASAN
