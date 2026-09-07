@@ -149,11 +149,27 @@ const experience = [
   },
 ];
 
-function SectionHeading({ eyebrow, title }: { eyebrow: string; title: string }) {
+function HighlightedTitle({ text, className = "" }: { text: string; className?: string }) {
+  const words = text.split(" ");
+  if (words.length === 1) {
+    return <span className={className}>{text}</span>;
+  }
+  const last = words[words.length - 1];
+  const rest = words.slice(0, -1).join(" ");
+  return (
+    <span className={className}>
+      {rest} <span className="text-accent">{last}</span>
+    </span>
+  );
+}
+
+function SectionHeading({ title }: { title: string }) {
   return (
     <div className="mb-10">
-      <p className="text-sm font-medium tracking-wide text-accent uppercase">{eyebrow}</p>
-      <h2 className="mt-2 text-4xl font-black tracking-tighter sm:text-5xl">{title}</h2>
+      <span className="mb-3 block h-1 w-10 rounded-full bg-accent" />
+      <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
+        <HighlightedTitle text={title} />
+      </h2>
     </div>
   );
 }
@@ -191,7 +207,7 @@ export default function Home() {
         {/* About */}
         <Reveal>
           <section className="border-t border-border py-20">
-            <SectionHeading eyebrow="About" title="Summary" />
+            <SectionHeading title="Summary" />
             <p className="max-w-3xl text-lg leading-relaxed text-muted">
               Senior Mobile Application Developer with 8+ years building native (iOS, Android)
               and cross-platform (Flutter, React Native, Apache Cordova) applications, with
@@ -207,9 +223,9 @@ export default function Home() {
         {/* Featured Projects */}
         <section id="projects" className="border-t border-border py-20">
           <Reveal>
-            <p className="text-sm font-medium tracking-wide text-accent uppercase">Selected Work</p>
-            <h2 className="mt-2 text-5xl font-black tracking-tighter sm:text-6xl">
-              Featured Projects
+            <span className="mb-3 block h-1 w-10 rounded-full bg-accent" />
+            <h2 className="text-5xl font-extrabold tracking-tight sm:text-6xl">
+              <HighlightedTitle text="Featured Projects" />
             </h2>
           </Reveal>
 
@@ -267,7 +283,7 @@ export default function Home() {
         {/* Skills */}
         <section id="skills" className="border-t border-border py-20">
           <Reveal>
-            <SectionHeading eyebrow="Toolbox" title="Skills" />
+            <SectionHeading title="Skills" />
           </Reveal>
           <div className="grid gap-8 sm:grid-cols-2">
             {skillGroups.map((group, i) => (
@@ -290,7 +306,7 @@ export default function Home() {
         {/* Experience */}
         <section id="experience" className="border-t border-border py-20">
           <Reveal>
-            <SectionHeading eyebrow="Career" title="Experience" />
+            <SectionHeading title="Experience" />
           </Reveal>
           <div className="space-y-8">
             {experience.map((job, i) => (
@@ -312,7 +328,7 @@ export default function Home() {
         {/* Contact */}
         <Reveal>
           <section id="contact" className="border-t border-border py-20">
-            <SectionHeading eyebrow="Get in Touch" title="Contact" />
+            <SectionHeading title="Contact" />
             <div className="flex flex-wrap gap-4">
               <a
                 href="mailto:channdrahaasan5@gmail.com"
@@ -339,7 +355,7 @@ export default function Home() {
         </Reveal>
 
         <footer className="border-t border-border py-10 text-center text-sm text-muted">
-          © {new Date().getFullYear()} B. Chandra Hasan. Built with Next.js &amp; Tailwind CSS.
+          © {new Date().getFullYear()} B. Chandra Hasan.
         </footer>
       </main>
     </>
